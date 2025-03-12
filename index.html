@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<title>Simple Calculator</title>
+</head>
+<body>
+    <h2>Monthly Expenses Calculator</h2>
+    <div class="container">
+      <p>Income: <span id="inncomedisplay">0</span></p>
+      <p>Expenses: <span id="expensesdisplay">0</span></p>
+      <p>Total Balance: <span id="totaldisplay">0</span></p>
+    </div>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name">
+        <br><br>
+        
+        <label for="category">Category:</label>
+        <input type="text" id="category">
+        <br><br>
+
+        <label>Type:</label>
+        <input type="radio" id="incomeType" name="type" value="income">
+        <label for="incomeType">Income</label>
+        <input type="radio" id="expenseType" name="type" value="expense">
+        <label for="expenseType">Expenses</label>
+        <br><br>
+
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount">
+        <br><br>
+    </form>
+    
+    <button onclick="addTransaction()">Submit</button>
+
+    <div class="transaction">
+        <h2>Transaction List</h2>
+        <table id="transactionTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
