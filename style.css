@@ -1,0 +1,15 @@
+form {
+    width: 25%;
+    background-color: aquamarine;
+    padding: 10px;
+}
+
+table{
+    width: 80%;
+}
+
+
+.transaction {
+    margin-left: 55%;
+    margin-top: -25%;
+}
