@@ -4,41 +4,40 @@ function addTransaction() {
     let name = document.getElementById('name').value.trim();
     let category = document.getElementById('category').value.trim();
     let amount = parseFloat(document.getElementById('amount').value);
-    let type = document.querySelector('input[name="type"]:checked');
+    let type = document.querySelector('input[name="type"]:checked')?.value;
 
-    if (name === "" || category === "" || isNaN(amount) || amount <= 0 || !type) {
+    if (!name || !category || isNaN(amount) || amount == 0 || !type) {
         alert("Please enter valid details.");
         return;
     }
-
-    type = type.value;
-    let table = document.getElementById('transactionTable').getElementsByTagName('tbody')[0];
-    let row = table.insertRow();
     
+    // Ensure expenses do not exceed income
+    if (type == "expense" && amount > income) {
+        alert("Invalid transaction");
+        return;
+    }
+    
+    
+    let table = document.getElementById('transactionTable');
+    let row = table.insertRow();
     row.insertCell(0).textContent = name;
     row.insertCell(1).textContent = category;
     row.insertCell(2).textContent = type;
     row.insertCell(3).textContent = amount.toFixed(2);
 
-    if (type === "income") {
-        income += amount;
-    } else {
-        expense += amount;
-    }
+   
+    type == "income" ? (income += amount) : (expense += amount);
 
     updateBalance();
     clearFields();
 }
 
 function updateBalance() {
-    document.getElementById('inncomedisplay').textContent = income.toFixed(2);
-    document.getElementById('expensesdisplay').textContent = expense.toFixed(2);
-    document.getElementById('totaldisplay').textContent = (income - expense).toFixed(2);
+    document.getElementById('income').textContent = income.toFixed(2);
+    document.getElementById('expense').textContent = expense.toFixed(2);
+    document.getElementById('balance').textContent = (income - expense).toFixed(2);
 }
 
 function clearFields() {
-    document.getElementById('name').value = "";
-    document.getElementById('category').value = "";
-    document.getElementById('amount').value = "";
-    document.querySelectorAll('input[name="type"]').forEach(radio => radio.checked = false);
+    ['name', 'category', 'amount'].forEach(id => document.getElementById(id).value = "");
 }
