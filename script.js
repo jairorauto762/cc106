@@ -16,8 +16,7 @@ function addTransaction() {
         alert("Invalid transaction");
         return;
     }
-    
-    
+
     let table = document.getElementById('transactionTable');
     let row = table.insertRow();
     row.insertCell(0).textContent = name;
@@ -25,19 +24,26 @@ function addTransaction() {
     row.insertCell(2).textContent = type;
     row.insertCell(3).textContent = amount.toFixed(2);
 
-   
-    type == "income" ? (income += amount) : (expense += amount);
+    // Update income or expense based on the type
+    if (type == "income") {
+        income += amount;
+    } else if (type == "expense") {
+        expense += amount;
+    }
 
     updateBalance();
     clearFields();
 }
 
 function updateBalance() {
-    document.getElementById('income').textContent = income.toFixed(2);
-    document.getElementById('expense').textContent = expense.toFixed(2);
-    document.getElementById('balance').textContent = (income - expense).toFixed(2);
+    document.getElementById('inncomedisplay').textContent = income.toFixed(2);
+    document.getElementById('expensesdisplay').textContent = expense.toFixed(2);
+    document.getElementById('totaldisplay').textContent = (income - expense).toFixed(2);
 }
 
 function clearFields() {
+    // Clear form fields
     ['name', 'category', 'amount'].forEach(id => document.getElementById(id).value = "");
+    // Clear the radio button selection
+    document.querySelector('input[name="type"]:checked')?.checked = false;
 }
